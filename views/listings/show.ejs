@@ -1,0 +1,365 @@
+
+<% layout("/layouts/boilerplate") %>
+
+<style>
+    * {
+        box-sizing: border-box;
+    }
+
+    body {
+        background: #1e1e1e;
+        color: white;
+        font-family: Arial, Helvetica, sans-serif;
+    }
+
+    .show-container {
+        max-width: 1050px;
+        margin: 60px auto;
+        padding: 14px;
+        display: grid;
+        grid-template-columns: 1fr 1fr;
+        background: #000;
+        gap: 0;
+    }
+
+    /* LEFT IMAGE PANEL */
+
+    .show-image-panel {
+        padding: 35px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        background:
+            radial-gradient(
+                ellipse at bottom right,
+                rgba(28, 150, 119, 0.5),
+                transparent 55%
+            ),
+            linear-gradient(135deg, #063b2e, #004b3d, #092d26);
+    }
+
+    .show-image-panel h1 {
+        font-size: 32px;
+        font-weight: 500;
+        line-height: 1.3;
+        margin: 0 0 12px;
+    }
+
+    .show-image-panel p {
+        font-size: 13px;
+        line-height: 1.7;
+        color: #c0d0ca;
+        margin: 0 0 25px;
+    }
+
+    .listing-image {
+        width: 100%;
+        height: 280px;
+        object-fit: cover;
+        display: block;
+        border-radius: 12px;
+        background: #183b32;
+        border: 1px solid rgba(255, 255, 255, 0.12);
+    }
+
+    .image-caption {
+        margin-top: 14px;
+        color: #c0d0ca;
+        font-size: 12px;
+    }
+
+    /* RIGHT DETAILS PANEL */
+
+    .show-details-panel {
+        background: #000;
+        padding: 40px;
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+    }
+
+    .details-header {
+        margin-bottom: 28px;
+    }
+
+    .details-header .eyebrow {
+        color: #65d9b2;
+        font-size: 11px;
+        text-transform: uppercase;
+        letter-spacing: 2px;
+        margin-bottom: 12px;
+    }
+
+    .details-header h2 {
+        font-size: 29px;
+        font-weight: 500;
+        line-height: 1.3;
+        overflow-wrap: anywhere;
+        margin: 0 0 12px;
+    }
+
+    .details-header .location {
+        color: #999;
+        font-size: 13px;
+    }
+
+    .description {
+        color: #c5c5c5;
+        font-size: 14px;
+        line-height: 1.8;
+        margin-bottom: 25px;
+        overflow-wrap: anywhere;
+    }
+
+    .details-box {
+        border: 1px solid #292929;
+        background: #111;
+        border-radius: 12px;
+        padding: 20px;
+        margin-bottom: 25px;
+    }
+
+    .detail-item {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-start;
+        gap: 15px;
+        padding: 12px 0;
+        border-bottom: 1px solid #292929;
+        font-size: 13px;
+    }
+
+    .detail-item:first-child {
+        padding-top: 0;
+    }
+
+    .detail-item:last-child {
+        border-bottom: none;
+        padding-bottom: 0;
+    }
+
+    .detail-label {
+        color: #888;
+        flex-shrink: 0;
+    }
+
+    .detail-value {
+        color: #f2f2f2;
+        text-align: right;
+        overflow-wrap: anywhere;
+    }
+
+    .price {
+        color: #65d9b2;
+        font-size: 20px;
+        font-weight: 600;
+    }
+
+    /* ACTION BUTTONS: SINGLE BLOCK */
+
+    .action-buttons {
+        display: flex;
+        gap: 12px;
+        width: 100%;
+    }
+
+    .action-buttons a,
+    .action-buttons button {
+        flex: 1;
+        min-width: 0;
+        min-height: 45px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        border-radius: 8px;
+        font-family: inherit;
+        font-size: 13px;
+        font-weight: 600;
+        text-decoration: none;
+        cursor: pointer;
+        transition: 0.25s;
+    }
+
+    .edit-btn {
+        background: white;
+        color: #080808;
+        border: 1px solid white;
+    }
+
+    .edit-btn:hover {
+        background: #c8f3e5;
+        border-color: #c8f3e5;
+    }
+
+    .delete-btn {
+        background: #171717;
+        color: #ff7777;
+        border: 1px solid #493030;
+    }
+
+    .delete-btn:hover {
+        background: #351919;
+        border-color: #ff7777;
+    }
+
+    .back-link {
+        display: inline-block;
+        margin-top: 22px;
+        color: #888;
+        font-size: 12px;
+        text-decoration: none;
+        text-align: center;
+    }
+
+    .back-link:hover {
+        color: #65d9b2;
+    }
+
+    /* RESPONSIVE DESIGN */
+
+    @media (max-width: 800px) {
+        .show-container {
+            max-width: 600px;
+            grid-template-columns: 1fr;
+            margin: 30px auto;
+        }
+
+        .show-image-panel {
+            padding: 28px;
+        }
+
+        .show-details-panel {
+            padding: 30px 25px;
+        }
+
+        .listing-image {
+            height: 260px;
+        }
+    }
+
+    @media (max-width: 420px) {
+        .show-container {
+            margin: 15px auto;
+            padding: 8px;
+        }
+
+        .show-image-panel,
+        .show-details-panel {
+            padding: 22px 16px;
+        }
+
+        .listing-image {
+            height: 210px;
+        }
+
+        .details-header h2 {
+            font-size: 24px;
+        }
+
+        .action-buttons {
+            gap: 8px;
+        }
+
+        .action-buttons a,
+        .action-buttons button {
+            font-size: 12px;
+        }
+    }
+</style>
+
+<main class="show-container">
+
+    <!-- LEFT PANEL: LISTING IMAGE -->
+
+    <section class="show-image-panel">
+
+        <h1>Discover Your<br>Next Adventure</h1>
+
+        <p>
+            Explore the details of this unique place
+            and get ready for your next journey.
+        </p>
+
+        <img
+            class="listing-image"
+            src="<%= listing.image && listing.image.url ? listing.image.url : 'https://placehold.co/600x400/164e41/ffffff?text=No+Image' %>"
+            alt="<%= listing.title %>"
+            onerror="this.onerror=null; this.src='https://placehold.co/600x400/164e41/ffffff?text=Image+Unavailable';"
+        >
+
+        <div class="image-caption">
+            YOUR NEXT DESTINATION
+        </div>
+
+    </section>
+
+    <!-- RIGHT PANEL: LISTING DETAILS -->
+
+    <section class="show-details-panel">
+
+        <div class="details-header">
+            <div class="eyebrow">Wanderlust Collection</div>
+
+            <h2><%= listing.title %></h2>
+
+            <div class="location">
+                <%= listing.location %>, <%= listing.country %>
+            </div>
+        </div>
+
+        <p class="description">
+            <%= listing.description || "No description available for this listing." %>
+        </p>
+
+        <div class="details-box">
+
+            <div class="detail-item">
+                <span class="detail-label">Price per night</span>
+                <span class="detail-value price">
+                    &#8377; <%= Number(listing.price).toLocaleString("en-IN") %>
+                </span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Location</span>
+                <span class="detail-value"><%= listing.location %></span>
+            </div>
+
+            <div class="detail-item">
+                <span class="detail-label">Country</span>
+                <span class="detail-value"><%= listing.country %></span>
+            </div>
+
+        </div>
+
+        <!-- EDIT AND DELETE IN ONE BLOCK -->
+
+        <div class="action-buttons">
+
+            <a
+                href="/listings/<%= listing._id %>/edit"
+                class="edit-btn"
+            >
+                Edit Listing
+            </a>
+
+            <form
+                method="POST"
+                action="/listings/<%= listing._id %>?_method=DELETE"
+                style="display: flex; flex: 1; min-width: 0;"
+                onsubmit="return confirm('Are you sure you want to delete this listing?');"
+            >
+                <button type="submit" class="delete-btn">
+                    Delete Listing
+                </button>
+            </form>
+
+        </div>
+
+        <a href="/listings" class="back-link">
+            ← Back to all listings
+        </a>
+
+    </section>
+
+</main>

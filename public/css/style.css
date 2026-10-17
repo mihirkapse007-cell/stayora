@@ -1,0 +1,112 @@
+body{
+    font-family: "Plus jakarta Sans",sans-serif;
+}
+
+.navbar{
+    height: 5rem;
+    
+}
+.fa-compass{
+color: #fe424d;
+font-size: 2rem;
+}
+
+.nav-link{
+    color: #ffeaea !important;
+}
+.f-info-links a {
+    text-decoration: none;
+    color: #e8dfdf;
+}
+.f-info-links a:hover {
+    text-decoration: underline;
+    color: #ffffff;
+}
+.f-info{
+    text-align: center;
+    height: 8rem;
+    display: flex;
+    background-color: rgb(19, 19, 20);
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+
+.f-info-links{
+    width: 100%;
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.f-info-socials{
+    width: 100%;
+    font-size: 1.5rem;
+    margin-right: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.name-tag{
+     display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+/* cards */
+.cards{
+    border: none !important;
+    margin-bottom: 2rem;
+    margin-right: 2rem;
+    display: flex;
+    color: white;
+
+}
+.card-img-top{
+    border-radius: 0.5rem !important;
+object-fit: cover !important;
+    width: 100% !important;
+}
+.card-body{
+    padding: 0 !important;
+}
+.description p{
+    font-weight: 400;
+}
+.title{
+        font-weight: bold;
+        margin-top: 2rem;
+}
+.price{
+    color: rgb(150, 150, 150);
+}
+.description{
+      display: -webkit-box;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp: 2;
+    overflow: hidden;
+}
+.listing-link{
+    text-decoration: none;
+    display: flex;
+    width: 18rem;
+
+     
+}
+.location{
+      color: rgb(150, 150, 150);     
+       flex-wrap: wrap;
+    justify-content: center;
+    align-items: space-evenly;
+}
+.listing-photos{
+ text-decoration: none;
+    display: flex;
+    flex-wrap: wrap;
+    align-items: space-evenly;
+    justify-content: center;
+
+}
+.form-box{
+    height: 600px;
+    width: 1200px;
+}

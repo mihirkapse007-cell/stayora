@@ -1,0 +1,438 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Edit Listing | Wanderlust</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            min-height: 100vh;
+            background: #1e1e1e;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            padding: 30px 16px;
+            font-family: Arial, Helvetica, sans-serif;
+            color: white;
+        }
+
+        .edit-container {
+            width: 100%;
+            max-width: 1050px;
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            background: #000;
+            padding: 14px;
+        }
+
+        /* LEFT IMAGE PANEL */
+
+        .image-panel {
+            background:
+                radial-gradient(
+                    ellipse at bottom right,
+                    rgba(28, 150, 119, 0.5),
+                    transparent 55%
+                ),
+                linear-gradient(135deg, #063b2e, #004b3d, #092d26);
+
+            padding: 35px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .image-panel h1 {
+            font-size: 32px;
+            font-weight: 500;
+            line-height: 1.3;
+            margin-bottom: 12px;
+        }
+
+        .image-panel p {
+            font-size: 13px;
+            color: #c0d0ca;
+            line-height: 1.7;
+            margin-bottom: 25px;
+        }
+
+        .preview-card {
+            background: rgba(0, 0, 0, 0.25);
+            border: 1px solid rgba(255, 255, 255, 0.12);
+            border-radius: 14px;
+            padding: 12px;
+        }
+
+        .preview-card img {
+            display: block;
+            width: 100%;
+            height: 250px;
+            object-fit: cover;
+            border-radius: 9px;
+            background: #183b32;
+        }
+
+        .preview-label {
+            margin-top: 13px;
+            font-size: 12px;
+            color: #d2e5dd;
+        }
+
+        .preview-title {
+            margin-top: 5px;
+            font-size: 17px;
+            font-weight: 600;
+            overflow-wrap: anywhere;
+        }
+
+        .preview-price {
+            margin-top: 7px;
+            font-size: 13px;
+            color: #b5e9d5;
+        }
+
+        .image-note {
+            margin-top: 18px;
+            font-size: 11px;
+            color: #a9c6bb;
+            line-height: 1.6;
+        }
+
+        /* RIGHT FORM PANEL */
+
+        .form-panel {
+            background: #000;
+            padding: 35px 45px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+        }
+
+        .form-header {
+            text-align: center;
+            margin-bottom: 27px;
+        }
+
+        .form-header h2 {
+            font-size: 25px;
+            font-weight: 500;
+            margin-bottom: 9px;
+        }
+
+        .form-header p {
+            color: #999;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .form-group {
+            margin-bottom: 17px;
+        }
+
+        .form-group label {
+            display: block;
+            font-size: 12px;
+            color: #e5e5e5;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea {
+            width: 100%;
+            padding: 12px;
+            background: #1c1c1c;
+            border: 1px solid #292929;
+            border-radius: 8px;
+            outline: none;
+            color: white;
+            font-family: inherit;
+            font-size: 12px;
+            transition: border-color 0.2s;
+        }
+
+        .form-group input {
+            height: 42px;
+        }
+
+        .form-group textarea {
+            min-height: 80px;
+            resize: vertical;
+            line-height: 1.5;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus {
+            border-color: #168b6b;
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: #858585;
+        }
+
+        .form-row {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 12px;
+        }
+
+        .submit-btn {
+            width: 100%;
+            height: 44px;
+            border: none;
+            border-radius: 8px;
+            background: white;
+            color: #080808;
+            font-size: 13px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background 0.2s, transform 0.2s;
+            margin-top: 3px;
+        }
+
+        .submit-btn:hover {
+            background: #c8f3e5;
+            transform: translateY(-2px);
+        }
+
+        .form-footer {
+            text-align: center;
+            color: #777;
+            font-size: 11px;
+            margin-top: 22px;
+        }
+
+        .form-footer a {
+            color: white;
+            text-decoration: none;
+        }
+
+        .form-footer a:hover {
+            color: #65d9b2;
+        }
+
+        /* RESPONSIVE */
+
+        @media (max-width: 850px) {
+            .edit-container {
+                max-width: 600px;
+                grid-template-columns: 1fr;
+            }
+
+            .image-panel {
+                padding: 28px;
+            }
+
+            .image-panel h1 {
+                font-size: 27px;
+            }
+
+            .preview-card img {
+                height: 220px;
+            }
+
+            .form-panel {
+                padding: 30px 25px;
+            }
+        }
+
+        @media (max-width: 420px) {
+            .image-panel,
+            .form-panel {
+                padding: 22px 16px;
+            }
+
+            .form-row {
+                grid-template-columns: 1fr;
+                gap: 0;
+            }
+        }
+    </style>
+</head>
+
+<body>
+
+    <main class="edit-container">
+
+        <!-- LEFT PANEL: CURRENT LISTING IMAGE -->
+
+        <section class="image-panel">
+
+            <h1>Update Your<br>Adventure</h1>
+
+            <p>
+                Make changes to your listing and keep your
+                property information up to date.
+            </p>
+
+            <div class="preview-card">
+
+                <img
+                    id="listing-preview"
+                    src="<%= listing.image && listing.image.url ? listing.image.url : 'https://placehold.co/600x400/164e41/ffffff?text=No+Image' %>"
+                    alt="Current listing image"
+                    onerror="this.onerror=null; this.src='https://placehold.co/600x400/164e41/ffffff?text=Image+Unavailable';"
+                >
+
+                <div class="preview-label">CURRENT LISTING</div>
+
+                <div class="preview-title" id="preview-title">
+                    <%= listing.title %>
+                </div>
+
+                <div class="preview-price">
+                    ₹<span id="preview-price"><%= listing.price %></span>
+                    <span> / night</span>
+                </div>
+
+            </div>
+
+            <div class="image-note">
+                Preview your existing listing here.
+                Update the details on the right and save your changes.
+            </div>
+
+        </section>
+
+        <!-- RIGHT PANEL: EDIT FORM -->
+
+        <section class="form-panel">
+
+            <div class="form-header">
+                <h2>Edit Listing</h2>
+                <p>Update your listing details below.</p>
+            </div>
+
+            <form
+                method="POST"
+                action="/listings/<%= listing._id %>?_method=PUT"
+            >
+
+                <div class="form-group">
+                    <label for="title">Listing Title</label>
+
+                    <input
+                        id="title"
+                        name="listing[title]"
+                        type="text"
+                        value="<%= listing.title %>"
+                        placeholder="Enter listing title"
+                        required
+                    >
+                </div>
+
+                <div class="form-group">
+                    <label for="description">Description</label>
+
+                    <textarea
+                        id="description"
+                        name="listing[description]"
+                        placeholder="Describe your place..."
+                    ><%= listing.description %></textarea>
+                </div>
+
+                <div class="form-group">
+                    <label for="image">Image URL</label>
+
+                    <input
+                        id="image"
+                        name="listing[image][url]"
+                        type="url"
+                        value="<%= listing.image && listing.image.url ? listing.image.url : '' %>"
+                        placeholder="Enter image URL"
+                    >
+                </div>
+
+                <div class="form-row">
+
+                    <div class="form-group">
+                        <label for="price">Price per Night (₹)</label>
+
+                        <input
+                            id="price"
+                            name="listing[price]"
+                            type="number"
+                            min="0"
+                            value="<%= listing.price %>"
+                            placeholder="Enter price"
+                            required
+                        >
+                    </div>
+
+                    <div class="form-group">
+                        <label for="location">Location</label>
+
+                        <input
+                            id="location"
+                            name="listing[location]"
+                            type="text"
+                            value="<%= listing.location %>"
+                            placeholder="Enter location"
+                            required
+                        >
+                    </div>
+
+                </div>
+
+                <div class="form-group">
+                    <label for="country">Country</label>
+
+                    <input
+                        id="country"
+                        name="listing[country]"
+                        type="text"
+                        value="<%= listing.country %>"
+                        placeholder="Enter country"
+                        required
+                    >
+                </div>
+
+                <button type="submit" class="submit-btn">
+                    Save Changes →
+                </button>
+
+                <div class="form-footer">
+                    Don't want to edit?
+                    <a href="/listings/<%= listing._id %>">Go Back</a>
+                </div>
+
+            </form>
+
+        </section>
+
+    </main>
+
+    <script>
+        const titleInput = document.getElementById("title");
+        const priceInput = document.getElementById("price");
+        const imageInput = document.getElementById("image");
+
+        const previewTitle = document.getElementById("preview-title");
+        const previewPrice = document.getElementById("preview-price");
+        const previewImage = document.getElementById("listing-preview");
+
+        titleInput.addEventListener("input", function () {
+            previewTitle.textContent = this.value || "Untitled Listing";
+        });
+
+        priceInput.addEventListener("input", function () {
+            previewPrice.textContent = this.value || "0";
+        });
+
+        imageInput.addEventListener("input", function () {
+            if (this.value.trim()) {
+                previewImage.src = this.value.trim();
+            }
+        });
+    </script>
+
+</body>
+</html>
