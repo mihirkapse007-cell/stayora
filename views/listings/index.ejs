@@ -9,8 +9,7 @@
   <div class="card-body">
     <img src="<%= listing.image.url %>" class="card-img-top" alt="listing_image" style="height: 20rem;">
     <h5 class="title"><%= listing.title %></h5>
-    <div class="price">&#8377; <%= listing.price.toLocaleString("en-IN") %>/Night</div>
-    <p class="description"><%= listing.description %> </p>
+    <div class="price">&#8377; <%= listing.price?.toLocaleString("en-IN") ?? "Price not added" %>/Night</div>
     <div class="location"><%= listing.location %></div>
   </div>
 </div>
